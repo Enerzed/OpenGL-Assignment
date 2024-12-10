@@ -8,10 +8,10 @@ const unsigned int HEIGHT = 1000;
 // Пол
 Vertex vertices[] = {
 	// Координаты							// Цвета					// Нормали					// Координаты текстур
-	Vertex{glm::vec3(-50.0f, 0.0f,  50.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f)},
-	Vertex{glm::vec3(-50.0f, 0.0f, -50.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f)},
-	Vertex{glm::vec3(50.0f, 0.0f, -50.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)},
-	Vertex{glm::vec3(50.0f, 0.0f,  50.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f)}
+	Vertex{glm::vec3(-100.0f, 0.0f,  100.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f)},
+	Vertex{glm::vec3(-100.0f, 0.0f, -100.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f)},
+	Vertex{glm::vec3(100.0f, 0.0f, -100.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)},
+	Vertex{glm::vec3(100.0f, 0.0f,  100.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f)}
 };
 
 GLuint indices[] = {
@@ -21,10 +21,10 @@ GLuint indices[] = {
 
 // Стена
 Vertex wall[] = {
-	Vertex{glm::vec3(-50.0f, 0.0f,  50.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)},
-	Vertex{glm::vec3(-50.0f, -25.0f,  50.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f)},
-	Vertex{glm::vec3(50.0f, -25.0f,  50.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f)},
-	Vertex{glm::vec3(50.0f, 0.0f,  50.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f)},
+	Vertex{glm::vec3(-100.0f, 0.0f,  100.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 1.0f)},
+	Vertex{glm::vec3(-100.0f, -100.0f,  100.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 1.0f)},
+	Vertex{glm::vec3(100.0f, -100.0f,  100.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(0.0f, 0.0f)},
+	Vertex{glm::vec3(100.0f, 0.0f,  100.0f), glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f), glm::vec2(1.0f, 0.0f)},
 };
 
 GLuint indices_wall[] = {
@@ -77,7 +77,7 @@ int main()
 	Shader shaderProgram("default.vert", "default.frag");
 
 	glm::vec4 lightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-	glm::vec3 lightPos = glm::vec3(0.f, 300.f, 0.f);
+	glm::vec3 lightPos = glm::vec3(100.f, 100.f, 0.f);
 	glm::mat4 lightModel = glm::mat4(1.0f);
 	lightModel = glm::translate(lightModel, lightPos);
 
@@ -92,9 +92,16 @@ int main()
 
 	// Статуя
 	Model statue("Models/lowe-3d-model/scene.gltf");
-	statue.Scale(glm::vec3(0.5, 0.5, 0.5));
+	//statue.Scale(glm::vec3(0.5, 0.5, 0.5));
 	statue.Rotate(glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0f));
 	statue.Translate(glm::vec3(-30, 0, 30));
+
+	Model dog("Models/dog/scene.gltf");
+	dog.Translate(glm::vec3(-1, -30, 0));
+	dog.Scale(glm::vec3(0.05, 0.05, 0.05));
+	dog.Rotate(glm::radians(-45.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+	dog.Rotate(glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -102,9 +109,10 @@ int main()
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		camera.Inputs(window);
-		camera.updateMatrix(45.0f, 0.1f, 100.0f);
+		camera.updateMatrix(45.0f, 0.1f, 1000.0f);
 
 		statue.Draw(shaderProgram, camera);
+		dog.Draw(shaderProgram, camera);
 		floor.Draw(shaderProgram, camera);
 		wall.Draw(shaderProgram, camera);
 		glfwSwapBuffers(window);
